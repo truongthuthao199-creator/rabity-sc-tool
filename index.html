@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rabity — Standard Cost</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f8fc;
+  --white: #ffffff;
+  --border: #e8ecf4;
+  --border2: #d4daea;
+  --accent: #ff6b35;
+  --accent2: #2ec97e;
+  --accent3: #4f8ef7;
+  --accent-soft: #fff0eb;
+  --accent2-soft: #e8faf2;
+  --accent3-soft: #eef4ff;
+  --text: #1a1f35;
+  --muted: #7a8299;
+  --muted2: #b0b7cc;
+  --warn: #f4a845;
+  --warn-soft: #fff8ec;
+  --danger: #f4524a;
+  --danger-soft: #fff0f0;
+  --shadow: 0 2px 12px rgba(30,40,80,0.07);
+  --shadow-lg: 0 8px 32px rgba(30,40,80,0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 0 0 60px;
+}
+
+/* HEADER */
+.header {
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 20px 14px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow);
+}
+.header h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+.header h1 span { color: var(--accent); }
+.header p { font-size: 12px; color: var(--muted); margin-top: 2px; font-weight: 500; }
+
+/* TABS */
+.tabs {
+  display: flex;
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  padding: 0 16px;
+  gap: 4px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 12px 8px 10px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: -2px;
+}
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; padding: 16px; }
+.tab-content.active { display: block; }
+
+/* CARD */
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+/* FORM */
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 5px;
+  font-family: 'Nunito', sans-serif;
+}
+input, select {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid var(--border2);
+  border-radius: 10px;
+  padding: 11px 13px;
+  color: var(--text);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,107,53,0.1);
+}
+.form-group { margin-bottom: 13px; }
+.form-row { display: flex; gap: 10px; margin-bottom: 13px; }
+.form-row .form-group { flex: 1; margin-bottom: 0; }
+
+input.mono {
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+/* DECODE CHIPS */
+.decode-bar { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
+.decode-chip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--border);
+  color: var(--muted);
+  font-family: 'Nunito', sans-serif;
+}
+.decode-chip.hit { background: var(--accent-soft); color: var(--accent); }
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 4px 14px rgba(255,107,53,0.3);
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,107,53,0.35); }
+.btn:active { transform: translateY(0); }
+.btn.green {
+  background: var(--accent2);
+  box-shadow: 0 4px 14px rgba(46,201,126,0.3);
+}
+.btn.green:hover { box-shadow: 0 6px 18px rgba(46,201,126,0.35); }
+.btn.secondary {
+  background: var(--bg);
+  color: var(--muted);
+  border: 1.5px solid var(--border2);
+  box-shadow: none;
+}
+.btn.secondary:hover { background: var(--border); box-shadow: none; }
+.btn.sm { padding: 8px 14px; font-size: 12px; width: auto; border-radius: 8px; }
+
+/* RESULT */
+#result-new { display: none; }
+.result-card {
+  background: var(--white);
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 14px;
+  box-shadow: 0 4px 20px rgba(255,107,53,0.1);
+}
+.result-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 8px; }
+.result-sc-id {
+  display: inline-block;
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+.result-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--text);
+}
+.result-sub { font-size: 12px; color: var(--muted); margin-top: 2px; font-weight: 600; }
+.result-median .lbl { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; text-align: right; font-family: 'Nunito', sans-serif; }
+.result-median .val {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent2);
+  white-space: nowrap;
+}
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.stat-box {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.stat-box .s-lbl { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-family: 'Nunito', sans-serif; }
+.stat-box .s-val { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; color: var(--text); }
+
+.pk-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: 'Nunito', sans-serif;
+}
+.pk-co-ban { background: var(--accent2-soft); color: var(--accent2); }
+.pk-trung-cap { background: var(--accent3-soft); color: var(--accent3); }
+.pk-cao-cap { background: var(--warn-soft); color: var(--warn); }
+
+.vat-lieu-box {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 9px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  margin-top: 10px;
+}
+.vat-lieu-box strong { color: var(--text); font-family: 'Nunito', sans-serif; font-size: 11px; }
+
+.warn-box {
+  background: var(--warn-soft);
+  border: 1.5px solid #f4c97a;
+  border-radius: 10px;
+  padding: 10px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #b07a10;
+  margin-top: 10px;
+  display: none;
+  font-family: 'Nunito', sans-serif;
+}
+.confidence-bar {
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: right;
+  font-family: 'Nunito', sans-serif;
+}
+.confidence-bar span { color: var(--accent2); }
+
+/* save to table btn */
+.save-btn-wrap { margin-top: 12px; display: flex; gap: 8px; }
+
+/* LOOKUP TAB */
+.search-wrap { position: relative; margin-bottom: 10px; }
+.search-wrap input { padding-left: 38px; }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; color: var(--muted2); pointer-events: none; }
+
+.filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.filter-btn {
+  padding: 5px 13px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border2);
+  background: var(--bg);
+  color: var(--muted);
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-btn.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+.count-lbl { font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 8px; font-family: 'Nunito', sans-serif; }
+
+.sc-list { display: flex; flex-direction: column; gap: 7px; max-height: 400px; overflow-y: auto; padding-right: 2px; }
+.sc-list::-webkit-scrollbar { width: 4px; }
+.sc-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.sc-item {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sc-item:hover { border-color: var(--accent); box-shadow: 0 2px 10px rgba(255,107,53,0.08); }
+.sc-item .i-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+.sc-item .i-name { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; color: var(--text); }
+.sc-item .i-median { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; color: var(--accent2); }
+.sc-item .i-sub { font-size: 11px; color: var(--muted); font-weight: 600; }
+
+/* SUMMARY TABLE TAB */
+.tbl-toolbar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+.tbl-toolbar .count-badge {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.tbl-wrap { overflow-x: auto; border-radius: 12px; border: 1.5px solid var(--border); background: var(--white); }
+table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 680px; }
+thead tr { background: var(--bg); border-bottom: 2px solid var(--border); }
+thead th {
+  padding: 10px 12px;
+  text-align: left;
+  font-family: 'Nunito', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--accent-soft); }
+tbody td { padding: 10px 12px; font-weight: 600; vertical-align: middle; }
+.td-sc { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--accent); font-size: 12px; }
+.td-median { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--accent2); font-size: 13px; white-space: nowrap; }
+.td-price { color: var(--muted); font-size: 11px; }
+.td-del { color: var(--muted2); cursor: pointer; font-size: 15px; padding: 2px 6px; border-radius: 6px; transition: all 0.15s; border: none; background: none; }
+.td-del:hover { background: var(--danger-soft); color: var(--danger); }
+.new-row { background: #f0fff7 !important; }
+.new-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: var(--accent2-soft);
+  color: var(--accent2);
+  font-family: 'Nunito', sans-serif;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.empty-tbl { text-align: center; padding: 40px 16px; color: var(--muted); font-size: 13px; font-weight: 600; }
+.empty-tbl .icon { font-size: 32px; margin-bottom: 8px; }
+
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(26,31,53,0.45); z-index: 100;
+  align-items: flex-end; justify-content: center;
+  padding: 0;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--white);
+  border-radius: 20px 20px 0 0;
+  padding: 22px 20px 32px;
+  width: 100%; max-width: 480px;
+  max-height: 85vh; overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+.modal-handle { width: 36px; height: 4px; background: var(--border2); border-radius: 2px; margin: 0 auto 18px; }
+.modal-close { float: right; background: var(--bg); border: none; color: var(--muted); font-size: 16px; cursor: pointer; width: 28px; height: 28px; border-radius: 8px; font-weight: 700; }
+.modal h2 { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 900; margin-bottom: 16px; padding-right: 32px; }
+.d-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; align-items: center; }
+.d-row:last-child { border-bottom: none; }
+.d-key { color: var(--muted); font-weight: 600; }
+.d-val { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px; text-align: right; }
+
+/* no result */
+.no-res { text-align: center; padding: 30px; color: var(--muted); font-size: 13px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🐣 <span>Rabity</span> Standard Cost</h1>
+  <p>Công ty TNHH Tân Phú · 75 nhóm SC</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('new')">🆕 SP Mới</button>
+  <button class="tab-btn" onclick="switchTab('lookup')">🔍 Tra Cứu</button>
+  <button class="tab-btn" onclick="switchTab('table')">📋 Tổng Hợp</button>
+</div>
+
+<!-- ========== TAB 1: SP MỚI ========== -->
+<div id="tab-new" class="tab-content active">
+  <div class="card">
+    <div class="card-title">Thông tin sản phẩm mới</div>
+    <div class="form-group">
+      <label>Mã SKU 8 số</label>
+      <input type="text" id="sku-input" class="mono" maxlength="8" placeholder="96000124" oninput="onSkuInput(this.value)" autocomplete="off">
+      <div class="decode-bar" id="decode-bar">
+        <span class="decode-chip" id="dc-brand">Thương hiệu: —</span>
+        <span class="decode-chip" id="dc-type">Loại: —</span>
+        <span class="decode-chip" id="dc-seq">STT: —</span>
+        <span class="decode-chip" id="dc-year">Năm: —</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Giá bán (VNĐ)</label>
+      <input type="number" id="price-input" placeholder="vd: 299000" min="0" step="1000">
+    </div>
+    <div class="form-group">
+      <label>Tên sản phẩm (tuỳ chọn)</label>
+      <input type="text" id="name-input" placeholder="vd: Áo thun bé gái Mickey">
+    </div>
+    <button class="btn" onclick="suggestSC()">✨ Gợi ý nhóm SC phù hợp</button>
+  </div>
+
+  <div id="result-new">
+    <div class="result-card">
+      <div class="result-header">
+        <div>
+          <div id="res-sc-id" class="result-sc-id">SC-xxx</div>
+          <div id="res-name" class="result-name">—</div>
+          <div id="res-sub" class="result-sub">—</div>
+        </div>
+        <div class="result-median">
+          <div class="lbl">SC Median</div>
+          <div id="res-median" class="val">—</div>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="s-lbl">P25 (Lower)</div><div id="res-p25" class="s-val">—</div></div>
+        <div class="stat-box"><div class="s-lbl">P75 (Upper)</div><div id="res-p75" class="s-val">—</div></div>
+        <div class="stat-box"><div class="s-lbl">% NVL</div><div id="res-nvl" class="s-val">—</div></div>
+        <div class="stat-box"><div class="s-lbl">% NC</div><div id="res-nc" class="s-val">—</div></div>
+      </div>
+      <div id="res-pk-wrap"></div>
+      <div id="res-vatlieu" class="vat-lieu-box"><strong>Vật liệu:</strong> —</div>
+      <div id="res-warn" class="warn-box">⚠️ Giá bán nằm ngoài dải giá nhóm này. SC Median chỉ mang tính tham khảo.</div>
+      <div class="confidence-bar">Độ khớp: <span id="res-conf">—</span></div>
+    </div>
+    <div class="save-btn-wrap">
+      <button class="btn green" onclick="saveToTable()">💾 Lưu vào bảng tổng hợp</button>
+      <button class="btn secondary" onclick="clearNew()">Nhập lại</button>
+    </div>
+    <div id="save-msg" style="display:none;text-align:center;font-size:12px;font-weight:700;color:var(--accent2);margin-top:8px;font-family:'Nunito',sans-serif;">✅ Đã lưu vào bảng tổng hợp!</div>
+  </div>
+</div>
+
+<!-- ========== TAB 2: TRA CỨU ========== -->
+<div id="tab-lookup" class="tab-content">
+  <div class="card">
+    <div class="card-title">Tìm kiếm nhóm SC</div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Tìm tên, mã SC..." oninput="renderLookup()">
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="setFilter(this,'')">Tất cả</button>
+      <button class="filter-btn" onclick="setFilter(this,'Cơ bản')">🟢 Cơ bản</button>
+      <button class="filter-btn" onclick="setFilter(this,'Trung cấp')">🔵 Trung cấp</button>
+      <button class="filter-btn" onclick="setFilter(this,'Cao cấp')">🟡 Cao cấp</button>
+    </div>
+    <div id="lookup-count" class="count-lbl">75 nhóm</div>
+    <div class="sc-list" id="sc-list"></div>
+  </div>
+</div>
+
+<!-- ========== TAB 3: TỔNG HỢP ========== -->
+<div id="tab-table" class="tab-content">
+  <div class="card" style="padding:14px 16px">
+    <div class="tbl-toolbar">
+      <span id="tbl-badge" class="count-badge">0 mục</span>
+      <button class="btn sm green" onclick="exportCSV()">⬇ Xuất CSV</button>
+      <button class="btn sm secondary" onclick="clearTable()">🗑 Xoá tất cả</button>
+    </div>
+    <div class="tbl-wrap">
+      <table id="summary-table">
+        <thead>
+          <tr>
+            <th>SKU</th>
+            <th>Tên SP</th>
+            <th>Nhóm SC</th>
+            <th>Giá bán</th>
+            <th>SC Median</th>
+            <th>P25</th>
+            <th>P75</th>
+            <th>Phân khúc</th>
+            <th>Loại</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbl-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalBg(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2 id="modal-title">—</h2>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const SC_DATA = [{"ma_sc":"965","ten_nhom":"SC-965 | Bộ Kiểu | Cao cấp 399k","loai_hh":"Bộ Kiểu","phan_khuc":"Cao cấp","dai_gia":"399k","sc_median":109686,"p25":109686,"p75":109686,"pct_nvl":0.52,"pct_nc":0.48,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"566","ten_nhom":"SC-566 | Bộ Nỉ | Cao cấp 0k – 469k","loai_hh":"Bộ Nỉ","phan_khuc":"Cao cấp","dai_gia":"0k – 469k","sc_median":136725,"p25":132080,"p75":141370,"pct_nvl":0.718,"pct_nc":0.282,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"166","ten_nhom":"SC-166 | Bộ Nỉ | Cơ bản 229k","loai_hh":"Bộ Nỉ","phan_khuc":"Cơ bản","dai_gia":"229k","sc_median":123981,"p25":123981,"p75":123981,"pct_nvl":0.714,"pct_nc":0.286,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"966","ten_nhom":"SC-966 | Bộ Nỉ | Cao cấp 269k – 439k","loai_hh":"Bộ Nỉ","phan_khuc":"Cao cấp","dai_gia":"269k – 439k","sc_median":118018,"p25":65235,"p75":122184,"pct_nvl":0.565,"pct_nc":0.435,"vat_lieu":"Vải chính + Dây phụ kiện + Phụ liệu khác"},{"ma_sc":"561","ten_nhom":"SC-561 | Bộ Thun Dài Tay | Cao cấp 329k – 369k","loai_hh":"Bộ Thun Dài Tay","phan_khuc":"Cao cấp","dai_gia":"329k – 369k","sc_median":96754,"p25":89386,"p75":104123,"pct_nvl":0.609,"pct_nc":0.391,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"961","ten_nhom":"SC-961 | Bộ Thun Dài Tay | Trung cấp 299k – 329k","loai_hh":"Bộ Thun Dài Tay","phan_khuc":"Trung cấp","dai_gia":"299k – 329k","sc_median":92261,"p25":82718,"p75":92972,"pct_nvl":0.619,"pct_nc":0.381,"vat_lieu":"Vải chính + Mác/Nhãn/Tag + Phụ liệu khác"},{"ma_sc":"160","ten_nhom":"SC-160 | Bộ Thun Ngắn Tay | Cao cấp 369k – 399k","loai_hh":"Bộ Thun Ngắn Tay","phan_khuc":"Cao cấp","dai_gia":"369k – 399k","sc_median":103777,"p25":100508,"p75":107849,"pct_nvl":0.681,"pct_nc":0.319,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"560","ten_nhom":"SC-560 | Bộ Thun Ngắn Tay | Cao cấp 239k – 369k","loai_hh":"Bộ Thun Ngắn Tay","phan_khuc":"Cao cấp","dai_gia":"239k – 369k","sc_median":89310,"p25":76054,"p75":99556,"pct_nvl":0.578,"pct_nc":0.422,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"960","ten_nhom":"SC-960 | Bộ Thun Ngắn Tay | Trung cấp 239k – 329k","loai_hh":"Bộ Thun Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"239k – 329k","sc_median":70301,"p25":66429,"p75":75160,"pct_nvl":0.524,"pct_nc":0.476,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"167","ten_nhom":"SC-167 | Bộ Thun Sát Nách | Cao cấp 379k","loai_hh":"Bộ Thun Sát Nách","phan_khuc":"Cao cấp","dai_gia":"379k","sc_median":107132,"p25":105593,"p75":108672,"pct_nvl":0.668,"pct_nc":0.332,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"567","ten_nhom":"SC-567 | Bộ Thun Sát Nách | Trung cấp 269k","loai_hh":"Bộ Thun Sát Nách","phan_khuc":"Trung cấp","dai_gia":"269k","sc_median":76334,"p25":72129,"p75":80538,"pct_nvl":0.564,"pct_nc":0.436,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"967","ten_nhom":"SC-967 | Bộ Thun Sát Nách | Trung cấp 239k – 279k","loai_hh":"Bộ Thun Sát Nách","phan_khuc":"Trung cấp","dai_gia":"239k – 279k","sc_median":66249,"p25":65312,"p75":67147,"pct_nvl":0.441,"pct_nc":0.559,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"955","ten_nhom":"SC-955 | Chân Váy | Cao cấp 239k – 399k","loai_hh":"Chân Váy","phan_khuc":"Cao cấp","dai_gia":"239k – 399k","sc_median":73399,"p25":69113,"p75":76498,"pct_nvl":0.522,"pct_nc":0.478,"vat_lieu":"Vải chính + Bo/Viền/Lót + Phụ liệu khác"},{"ma_sc":"555","ten_nhom":"SC-555 | Chân Váy | Trung cấp 279k – 299k","loai_hh":"Chân Váy","phan_khuc":"Trung cấp","dai_gia":"279k – 299k","sc_median":65650,"p25":63205,"p75":68096,"pct_nvl":0.524,"pct_nc":0.476,"vat_lieu":"Vải chính + Phụ liệu khác + Bo/Viền/Lót"},{"ma_sc":"941","ten_nhom":"SC-941 | Quần Jeans Dài | Cao cấp 329k – 369k","loai_hh":"Quần Jeans Dài","phan_khuc":"Cao cấp","dai_gia":"329k – 369k","sc_median":81910,"p25":77502,"p75":88498,"pct_nvl":0.485,"pct_nc":0.515,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"141","ten_nhom":"SC-141 | Quần Jeans Dài | Trung cấp 299k","loai_hh":"Quần Jeans Dài","phan_khuc":"Trung cấp","dai_gia":"299k","sc_median":81400,"p25":81400,"p75":81400,"pct_nvl":0.343,"pct_nc":0.657,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"942","ten_nhom":"SC-942 | Quần Kaki Dài | Trung cấp 299k – 349k","loai_hh":"Quần Kaki Dài","phan_khuc":"Trung cấp","dai_gia":"299k – 349k","sc_median":82625,"p25":78344,"p75":84764,"pct_nvl":0.567,"pct_nc":0.433,"vat_lieu":"Vải chính + Phụ liệu khác + Túi/Bao bì"},{"ma_sc":"943","ten_nhom":"SC-943 | Quần Legging Dài | Cơ bản 159k – 199k","loai_hh":"Quần Legging Dài","phan_khuc":"Cơ bản","dai_gia":"159k – 199k","sc_median":44970,"p25":43356,"p75":46024,"pct_nvl":0.554,"pct_nc":0.446,"vat_lieu":"Vải chính + Chỉ may + Mác/Nhãn/Tag"},{"ma_sc":"948","ten_nhom":"SC-948 | Quần Legging Lửng | Cơ bản 129k","loai_hh":"Quần Legging Lửng","phan_khuc":"Cơ bản","dai_gia":"129k","sc_median":31270,"p25":31270,"p75":31270,"pct_nvl":0.376,"pct_nc":0.624,"vat_lieu":"Vải chính + Mác/Nhãn/Tag + Phụ liệu khác"},{"ma_sc":"947","ten_nhom":"SC-947 | Quần Nhung Dài | Trung cấp 299k – 339k","loai_hh":"Quần Nhung Dài","phan_khuc":"Trung cấp","dai_gia":"299k – 339k","sc_median":60923,"p25":60658,"p75":61187,"pct_nvl":0.49,"pct_nc":0.51,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"144","ten_nhom":"SC-144 | Quần Nỉ Dài | Cơ bản 199k","loai_hh":"Quần Nỉ Dài","phan_khuc":"Cơ bản","dai_gia":"199k","sc_median":58403,"p25":58403,"p75":58403,"pct_nvl":0.589,"pct_nc":0.411,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"931","ten_nhom":"SC-931 | Quần Short Jeans | Trung cấp 269k","loai_hh":"Quần Short Jeans","phan_khuc":"Trung cấp","dai_gia":"269k","sc_median":67121,"p25":67121,"p75":67121,"pct_nvl":0.37,"pct_nc":0.63,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"530","ten_nhom":"SC-530 | Quần Short Kaki | Trung cấp 349k","loai_hh":"Quần Short Kaki","phan_khuc":"Trung cấp","dai_gia":"349k","sc_median":103624,"p25":103624,"p75":103624,"pct_nvl":0.685,"pct_nc":0.315,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"130","ten_nhom":"SC-130 | Quần Short Kaki | Trung cấp 249k – 299k","loai_hh":"Quần Short Kaki","phan_khuc":"Trung cấp","dai_gia":"249k – 299k","sc_median":79509,"p25":78702,"p75":80403,"pct_nvl":0.626,"pct_nc":0.374,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"930","ten_nhom":"SC-930 | Quần Short Kaki | Trung cấp 199k – 279k","loai_hh":"Quần Short Kaki","phan_khuc":"Trung cấp","dai_gia":"199k – 279k","sc_median":61224,"p25":51645,"p75":66072,"pct_nvl":0.5,"pct_nc":0.5,"vat_lieu":"Vải chính + Phụ liệu khác + Dây phụ kiện"},{"ma_sc":"133","ten_nhom":"SC-133 | Quần Short Thun | Cơ bản 179k","loai_hh":"Quần Short Thun","phan_khuc":"Cơ bản","dai_gia":"179k","sc_median":59343,"p25":59343,"p75":59343,"pct_nvl":0.621,"pct_nc":0.379,"vat_lieu":"Phụ liệu khác + Mác/Nhãn/Tag + Dây phụ kiện"},{"ma_sc":"533","ten_nhom":"SC-533 | Quần Short Thun | Cơ bản 159k – 169k","loai_hh":"Quần Short Thun","phan_khuc":"Cơ bản","dai_gia":"159k – 169k","sc_median":47036,"p25":47022,"p75":47049,"pct_nvl":0.431,"pct_nc":0.569,"vat_lieu":"Phụ liệu khác + Vải chính + Mác/Nhãn/Tag"},{"ma_sc":"933","ten_nhom":"SC-933 | Quần Short Thun | Cơ bản 129k – 199k","loai_hh":"Quần Short Thun","phan_khuc":"Cơ bản","dai_gia":"129k – 199k","sc_median":39768,"p25":36563,"p75":44199,"pct_nvl":0.442,"pct_nc":0.558,"vat_lieu":"Vải chính + Mác/Nhãn/Tag + Phụ liệu khác"},{"ma_sc":"132","ten_nhom":"SC-132 | Quần Short Thô | Trung cấp 299k","loai_hh":"Quần Short Thô","phan_khuc":"Trung cấp","dai_gia":"299k","sc_median":77200,"p25":77200,"p75":77200,"pct_nvl":0.629,"pct_nc":0.37,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"532","ten_nhom":"SC-532 | Quần Short Thô | Trung cấp 229k – 299k","loai_hh":"Quần Short Thô","phan_khuc":"Trung cấp","dai_gia":"229k – 299k","sc_median":59790,"p25":56713,"p75":71476,"pct_nvl":0.511,"pct_nc":0.489,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"932","ten_nhom":"SC-932 | Quần Short Thô | Trung cấp 219k – 269k","loai_hh":"Quần Short Thô","phan_khuc":"Trung cấp","dai_gia":"219k – 269k","sc_median":58694,"p25":53320,"p75":61844,"pct_nvl":0.465,"pct_nc":0.535,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"940","ten_nhom":"SC-940 | Quần Thun Dài | Cơ bản 169k – 179k","loai_hh":"Quần Thun Dài","phan_khuc":"Cơ bản","dai_gia":"169k – 179k","sc_median":47346,"p25":43121,"p75":52031,"pct_nvl":0.436,"pct_nc":0.564,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"936","ten_nhom":"SC-936 | Quần Yếm Short | Trung cấp 299k","loai_hh":"Quần Yếm Short","phan_khuc":"Trung cấp","dai_gia":"299k","sc_median":79272,"p25":78074,"p75":80470,"pct_nvl":0.547,"pct_nc":0.453,"vat_lieu":"Vải chính + Khóa/Nút/Cúc + Mác/Nhãn/Tag"},{"ma_sc":"557","ten_nhom":"SC-557 | Set Đầm Áo | Trung cấp 349k","loai_hh":"Set Đầm Áo","phan_khuc":"Trung cấp","dai_gia":"349k","sc_median":113449,"p25":113449,"p75":113449,"pct_nvl":0.683,"pct_nc":0.317,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"957","ten_nhom":"SC-957 | Set Đầm Áo | Cao cấp 369k – 429k","loai_hh":"Set Đầm Áo","phan_khuc":"Cao cấp","dai_gia":"369k – 429k","sc_median":102734,"p25":90400,"p75":112440,"pct_nvl":0.461,"pct_nc":0.539,"vat_lieu":"Vải chính + Phụ liệu khác + Bo/Viền/Lót"},{"ma_sc":"953","ten_nhom":"SC-953 | Váy Công Chúa | Cao cấp 299k – 769k","loai_hh":"Váy Công Chúa","phan_khuc":"Cao cấp","dai_gia":"299k – 769k","sc_median":135805,"p25":110908,"p75":155146,"pct_nvl":0.576,"pct_nc":0.424,"vat_lieu":"Bo/Viền/Lót + Vải chính + Dây phụ kiện"},{"ma_sc":"951","ten_nhom":"SC-951 | Váy Dài Tay | Cao cấp 399k – 439k","loai_hh":"Váy Dài Tay","phan_khuc":"Cao cấp","dai_gia":"399k – 439k","sc_median":94528,"p25":93689,"p75":116411,"pct_nvl":0.508,"pct_nc":0.491,"vat_lieu":"Vải chính + Khóa/Nút/Cúc + Mác/Nhãn/Tag"},{"ma_sc":"551","ten_nhom":"SC-551 | Váy Dài Tay | Cao cấp 239k – 369k","loai_hh":"Váy Dài Tay","phan_khuc":"Cao cấp","dai_gia":"239k – 369k","sc_median":91880,"p25":84930,"p75":98831,"pct_nvl":0.668,"pct_nc":0.332,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"150","ten_nhom":"SC-150 | Váy Ngắn Tay | Cao cấp 399k – 499k","loai_hh":"Váy Ngắn Tay","phan_khuc":"Cao cấp","dai_gia":"399k – 499k","sc_median":142586,"p25":129240,"p75":155931,"pct_nvl":0.698,"pct_nc":0.302,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"550","ten_nhom":"SC-550 | Váy Ngắn Tay | Cao cấp 229k – 469k","loai_hh":"Váy Ngắn Tay","phan_khuc":"Cao cấp","dai_gia":"229k – 469k","sc_median":106365,"p25":77931,"p75":126597,"pct_nvl":0.609,"pct_nc":0.391,"vat_lieu":"Phụ liệu khác + Vải chính + Khóa/Nút/Cúc"},{"ma_sc":"950","ten_nhom":"SC-950 | Váy Ngắn Tay | Cao cấp 199k – 499k","loai_hh":"Váy Ngắn Tay","phan_khuc":"Cao cấp","dai_gia":"199k – 499k","sc_median":70415,"p25":57876,"p75":95181,"pct_nvl":0.556,"pct_nc":0.444,"vat_lieu":"Vải chính + Bo/Viền/Lót + Khóa/Nút/Cúc"},{"ma_sc":"952","ten_nhom":"SC-952 | Váy Sát Nách | Cao cấp 169k – 769k","loai_hh":"Váy Sát Nách","phan_khuc":"Cao cấp","dai_gia":"169k – 769k","sc_median":76141,"p25":59769,"p75":105553,"pct_nvl":0.57,"pct_nc":0.43,"vat_lieu":"Vải chính + Dây phụ kiện + Bo/Viền/Lót"},{"ma_sc":"552","ten_nhom":"SC-552 | Váy Sát Nách | Cao cấp 189k – 429k","loai_hh":"Váy Sát Nách","phan_khuc":"Cao cấp","dai_gia":"189k – 429k","sc_median":65062,"p25":59046,"p75":73644,"pct_nvl":0.682,"pct_nc":0.318,"vat_lieu":"Bo/Viền/Lót + Vải chính + Phụ liệu khác"},{"ma_sc":"956","ten_nhom":"SC-956 | Yếm Váy | Cao cấp 299k – 399k","loai_hh":"Yếm Váy","phan_khuc":"Cao cấp","dai_gia":"299k – 399k","sc_median":94208,"p25":86041,"p75":102376,"pct_nvl":0.582,"pct_nc":0.418,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"916","ten_nhom":"SC-916 | Áo Dài Dài Tay | Cao cấp 349k – 879k","loai_hh":"Áo Dài Dài Tay","phan_khuc":"Cao cấp","dai_gia":"349k – 879k","sc_median":149136,"p25":130003,"p75":193765,"pct_nvl":0.584,"pct_nc":0.416,"vat_lieu":"Vải chính + Bo/Viền/Lót + Phụ liệu khác"},{"ma_sc":"904","ten_nhom":"SC-904 | Áo Dài Ngắn Tay | Cao cấp 399k","loai_hh":"Áo Dài Ngắn Tay","phan_khuc":"Cao cấp","dai_gia":"399k","sc_median":95741,"p25":95741,"p75":95741,"pct_nvl":0.551,"pct_nc":0.449,"vat_lieu":"Vải chính + Mác/Nhãn/Tag + Phụ liệu khác"},{"ma_sc":"115","ten_nhom":"SC-115 | Áo Hoodies | Cơ bản 125k","loai_hh":"Áo Hoodies","phan_khuc":"Cơ bản","dai_gia":"125k","sc_median":80361,"p25":80274,"p75":80448,"pct_nvl":0.644,"pct_nc":0.356,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"915","ten_nhom":"SC-915 | Áo Hoodies | Trung cấp 299k","loai_hh":"Áo Hoodies","phan_khuc":"Trung cấp","dai_gia":"299k","sc_median":77944,"p25":76043,"p75":79846,"pct_nvl":0.648,"pct_nc":0.352,"vat_lieu":"Vải chính + Mác/Nhãn/Tag + Dây phụ kiện"},{"ma_sc":"926","ten_nhom":"SC-926 | Áo Khoác Dạ | Cao cấp 569k","loai_hh":"Áo Khoác Dạ","phan_khuc":"Cao cấp","dai_gia":"569k","sc_median":139638,"p25":139638,"p75":139638,"pct_nvl":0.595,"pct_nc":0.405,"vat_lieu":"Vải chính + Dây phụ kiện + Phụ liệu khác"},{"ma_sc":"522","ten_nhom":"SC-522 | Áo Khoác Gió | Trung cấp 199k – 329k","loai_hh":"Áo Khoác Gió","phan_khuc":"Trung cấp","dai_gia":"199k – 329k","sc_median":101114,"p25":97632,"p75":106732,"pct_nvl":0.51,"pct_nc":0.49,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"922","ten_nhom":"SC-922 | Áo Khoác Gió | Cao cấp 329k – 399k","loai_hh":"Áo Khoác Gió","phan_khuc":"Cao cấp","dai_gia":"329k – 399k","sc_median":92620,"p25":84096,"p75":107889,"pct_nvl":0.508,"pct_nc":0.492,"vat_lieu":"Vải chính + Khóa/Nút/Cúc + Bo/Viền/Lót"},{"ma_sc":"524","ten_nhom":"SC-524 | Áo Khoác Nỉ | Cao cấp 359k – 369k","loai_hh":"Áo Khoác Nỉ","phan_khuc":"Cao cấp","dai_gia":"359k – 369k","sc_median":118682,"p25":116584,"p75":120779,"pct_nvl":0.639,"pct_nc":0.361,"vat_lieu":"Phụ liệu khác + Vải chính + Bo/Viền/Lót"},{"ma_sc":"924","ten_nhom":"SC-924 | Áo Khoác Nỉ | Cao cấp 249k – 369k","loai_hh":"Áo Khoác Nỉ","phan_khuc":"Cao cấp","dai_gia":"249k – 369k","sc_median":85092,"p25":76335,"p75":93729,"pct_nvl":0.669,"pct_nc":0.331,"vat_lieu":"Vải chính + Phụ liệu khác + Bo/Viền/Lót"},{"ma_sc":"913","ten_nhom":"SC-913 | Áo Kiểu Dài Tay | Trung cấp 299k","loai_hh":"Áo Kiểu Dài Tay","phan_khuc":"Trung cấp","dai_gia":"299k","sc_median":94302,"p25":86788,"p75":101816,"pct_nvl":0.529,"pct_nc":0.471,"vat_lieu":"Vải chính + Mác/Nhãn/Tag + Khóa/Nút/Cúc"},{"ma_sc":"503","ten_nhom":"SC-503 | Áo Kiểu Ngắn Tay | Trung cấp 299k","loai_hh":"Áo Kiểu Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"299k","sc_median":79513,"p25":79513,"p75":79513,"pct_nvl":0.673,"pct_nc":0.327,"vat_lieu":"Phụ liệu khác + Bo/Viền/Lót + Mác/Nhãn/Tag"},{"ma_sc":"903","ten_nhom":"SC-903 | Áo Kiểu Ngắn Tay | Trung cấp 169k – 299k","loai_hh":"Áo Kiểu Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"169k – 299k","sc_median":49391,"p25":46315,"p75":65156,"pct_nvl":0.492,"pct_nc":0.507,"vat_lieu":"Vải chính + Dây phụ kiện + Phụ liệu khác"},{"ma_sc":"914","ten_nhom":"SC-914 | Áo Nỉ | Cao cấp 239k – 369k","loai_hh":"Áo Nỉ","phan_khuc":"Cao cấp","dai_gia":"239k – 369k","sc_median":93055,"p25":71816,"p75":93606,"pct_nvl":0.568,"pct_nc":0.432,"vat_lieu":"Vải chính + Khóa/Nút/Cúc + Phụ liệu khác"},{"ma_sc":"912","ten_nhom":"SC-912 | Áo Sơ Mi Dài Tay | Cao cấp 269k – 369k","loai_hh":"Áo Sơ Mi Dài Tay","phan_khuc":"Cao cấp","dai_gia":"269k – 369k","sc_median":82989,"p25":77534,"p75":88449,"pct_nvl":0.56,"pct_nc":0.44,"vat_lieu":"Vải chính + Khóa/Nút/Cúc + Mác/Nhãn/Tag"},{"ma_sc":"102","ten_nhom":"SC-102 | Áo Sơ Mi Ngắn Tay | Trung cấp 269k – 299k","loai_hh":"Áo Sơ Mi Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"269k – 299k","sc_median":86588,"p25":85892,"p75":88752,"pct_nvl":0.548,"pct_nc":0.452,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"502","ten_nhom":"SC-502 | Áo Sơ Mi Ngắn Tay | Trung cấp 209k – 299k","loai_hh":"Áo Sơ Mi Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"209k – 299k","sc_median":72333,"p25":68268,"p75":72622,"pct_nvl":0.49,"pct_nc":0.51,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"902","ten_nhom":"SC-902 | Áo Sơ Mi Ngắn Tay | Trung cấp 189k – 269k","loai_hh":"Áo Sơ Mi Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"189k – 269k","sc_median":62654,"p25":61254,"p75":63845,"pct_nvl":0.498,"pct_nc":0.502,"vat_lieu":"Vải chính + Khóa/Nút/Cúc + Mác/Nhãn/Tag"},{"ma_sc":"101","ten_nhom":"SC-101 | Áo Thun Cổ Bẻ Ngắn Tay | Trung cấp 229k – 299k","loai_hh":"Áo Thun Cổ Bẻ Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"229k – 299k","sc_median":86484,"p25":83928,"p75":87846,"pct_nvl":0.578,"pct_nc":0.422,"vat_lieu":"Bo/Viền/Lót + Phụ liệu khác + Vải chính"},{"ma_sc":"501","ten_nhom":"SC-501 | Áo Thun Cổ Bẻ Ngắn Tay | Trung cấp 199k – 319k","loai_hh":"Áo Thun Cổ Bẻ Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"199k – 319k","sc_median":81444,"p25":71150,"p75":84930,"pct_nvl":0.588,"pct_nc":0.412,"vat_lieu":"Vải chính + Phụ liệu khác + Bo/Viền/Lót"},{"ma_sc":"901","ten_nhom":"SC-901 | Áo Thun Cổ Bẻ Ngắn Tay | Trung cấp 199k – 299k","loai_hh":"Áo Thun Cổ Bẻ Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"199k – 299k","sc_median":68917,"p25":55979,"p75":73798,"pct_nvl":0.518,"pct_nc":0.482,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"510","ten_nhom":"SC-510 | Áo Thun Dài Tay | Cơ bản 199k","loai_hh":"Áo Thun Dài Tay","phan_khuc":"Cơ bản","dai_gia":"199k","sc_median":69570,"p25":69570,"p75":69570,"pct_nvl":0.583,"pct_nc":0.417,"vat_lieu":"Phụ liệu khác + Vải chính + Mác/Nhãn/Tag"},{"ma_sc":"910","ten_nhom":"SC-910 | Áo Thun Dài Tay | Cơ bản 169k – 179k","loai_hh":"Áo Thun Dài Tay","phan_khuc":"Cơ bản","dai_gia":"169k – 179k","sc_median":44664,"p25":44252,"p75":45076,"pct_nvl":0.563,"pct_nc":0.437,"vat_lieu":"Vải chính + Mác/Nhãn/Tag"},{"ma_sc":"100","ten_nhom":"SC-100 | Áo Thun Ngắn Tay | Trung cấp 249k – 269k","loai_hh":"Áo Thun Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"249k – 269k","sc_median":68126,"p25":64235,"p75":69802,"pct_nvl":0.616,"pct_nc":0.384,"vat_lieu":"Phụ liệu khác + Vải chính + Mác/Nhãn/Tag"},{"ma_sc":"500","ten_nhom":"SC-500 | Áo Thun Ngắn Tay | Trung cấp 0k – 279k","loai_hh":"Áo Thun Ngắn Tay","phan_khuc":"Trung cấp","dai_gia":"0k – 279k","sc_median":51857,"p25":48410,"p75":58566,"pct_nvl":0.51,"pct_nc":0.452,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"900","ten_nhom":"SC-900 | Áo Thun Ngắn Tay | Cơ bản 129k – 199k","loai_hh":"Áo Thun Ngắn Tay","phan_khuc":"Cơ bản","dai_gia":"129k – 199k","sc_median":44226,"p25":40818,"p75":55297,"pct_nvl":0.541,"pct_nc":0.459,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"},{"ma_sc":"505","ten_nhom":"SC-505 | Áo Thun Sát Nách | Cơ bản 169k – 179k","loai_hh":"Áo Thun Sát Nách","phan_khuc":"Cơ bản","dai_gia":"169k – 179k","sc_median":52845,"p25":50584,"p75":56182,"pct_nvl":0.566,"pct_nc":0.434,"vat_lieu":"Phụ liệu khác + Vải chính + Mác/Nhãn/Tag"},{"ma_sc":"905","ten_nhom":"SC-905 | Áo Thun Sát Nách | Cơ bản 139k","loai_hh":"Áo Thun Sát Nách","phan_khuc":"Cơ bản","dai_gia":"139k","sc_median":38744,"p25":38744,"p75":38744,"pct_nvl":0.432,"pct_nc":0.568,"vat_lieu":"Vải chính + Mác/Nhãn/Tag"},{"ma_sc":"954","ten_nhom":"SC-954 | Đầm Váy 2 Dây | Trung cấp 249k – 329k","loai_hh":"Đầm Váy 2 Dây","phan_khuc":"Trung cấp","dai_gia":"249k – 329k","sc_median":70294,"p25":57508,"p75":76038,"pct_nvl":0.453,"pct_nc":0.547,"vat_lieu":"Vải chính + Phụ liệu khác + Khóa/Nút/Cúc"},{"ma_sc":"959","ten_nhom":"SC-959 | — | Cao cấp 429k – 499k","loai_hh":"—","phan_khuc":"Cao cấp","dai_gia":"429k – 499k","sc_median":128579,"p25":126553,"p75":130605,"pct_nvl":0.505,"pct_nc":0.495,"vat_lieu":"Vải chính + Khóa/Nút/Cúc + Phụ liệu khác"},{"ma_sc":"958","ten_nhom":"SC-958 | — | Cao cấp 429k – 499k","loai_hh":"—","phan_khuc":"Cao cấp","dai_gia":"429k – 499k","sc_median":119043,"p25":80288,"p75":119719,"pct_nvl":0.691,"pct_nc":0.309,"vat_lieu":"Vải chính + Khóa/Nút/Cúc + Mác/Nhãn/Tag"},{"ma_sc":"939","ten_nhom":"SC-939 | — | Trung cấp 299k","loai_hh":"—","phan_khuc":"Trung cấp","dai_gia":"299k","sc_median":80061,"p25":80061,"p75":80061,"pct_nvl":0.578,"pct_nc":0.422,"vat_lieu":"Vải chính + Phụ liệu khác + Mác/Nhãn/Tag"}];
+
+const BRAND={'9':'Rabity','5':'Disney','8':'ELLE','7':'Đồng giá','2':'Bán đứt','1':'Bản quyền','6':'OEM','3':'Hàng tặng'};
+const CATE={'00':'Áo ngắn tay thun','01':'Áo cổ bẻ ngắn tay','02':'Áo sơ mi ngắn tay','03':'Áo kiểu ngắn tay','04':'Áo dài tết ngắn tay','05':'Áo sát nách thun','10':'Áo dài tay thun','11':'Áo cổ bẻ dài tay','12':'Áo sơ mi dài tay','13':'Áo kiểu dài tay','14':'Áo dài tay nỉ','15':'Áo dài tay nỉ có mũ','16':'Áo dài tết dài tay','17':'Áo lót','18':'Áo len','20':'Áo vest','21':'Áo gile','22':'Áo khoác gió','23':'Áo phao','24':'Áo khoác nỉ dài tay','25':'Áo khoác kaki/denim','26':'Áo khoác dạ','27':'Áo khoác thun','28':'Áo khoác len','30':'Quần short kaki','31':'Quần short jeans','32':'Quần short thô','33':'Quần short thun','34':'Quần short','35':'Quần lót','36':'Quần yếm short','39':'Quần dài gió','40':'Quần dài thun','41':'Quần dài jeans','42':'Quần dài kaki','43':'Quần legging dài','44':'Quần dài nỉ','45':'Quần yếm dài','46':'Quần dài thô','47':'Quần dài nhung','48':'Quần legging lửng','50':'Đầm ngắn tay','51':'Đầm dài tay','52':'Đầm sát nách','53':'Đầm công chúa','54':'Đầm váy 2 dây','55':'Chân váy','56':'Yếm váy','57':'Bộ áo váy','58':'Set yếm','59':'Bộ ngắn tay','60':'Bộ ngắn tay thun','61':'Bộ dài tay thun','62':'Bộ pijama ngắn tay','63':'Bộ pijama dài tay','64':'Bộ vest','65':'Bộ kiểu/thô','66':'Bộ dài tay nỉ','67':'Bộ sát nách thun','68':'Bộ sơ sinh','70':'Khăn/Khẩu trang/Tất','71':'Phụ kiện thời trang','72':'Gối','73':'Đồ chơi','74':'Bộ bơi','75':'Set sơ sinh','76':'Túi xách','77':'Bình nước','78':'Mũ bảo hiểm','80':'Dép','81':'Sandal','82':'Giày tập đi','83':'Giày búp bê','84':'Giày thể thao','85':'Dép sục','86':'Giày nhựa','87':'Giày bốt','88':'Charm','89':'Giày lười','90':'Quà tặng','91':'Voucher','92':'Túi bán hàng','93':'Hàng mẫu','94':'Thuế','95':'Hộp'};
+const CATE_TO_SC={'00':['Áo Thun Ngắn Tay'],'01':['Áo Thun Cổ Bẻ Ngắn Tay'],'02':['Áo Sơ Mi Ngắn Tay'],'03':['Áo Kiểu Ngắn Tay'],'10':['Áo Thun Dài Tay'],'11':['Áo Thun Cổ Bẻ Ngắn Tay'],'12':['Áo Sơ Mi Dài Tay'],'13':['Áo Kiểu Dài Tay'],'14':['Áo Hoodies','Áo Nỉ'],'15':['Áo Hoodies'],'18':['Áo Hoodies'],'04':['Áo Dài Ngắn Tay'],'16':['Áo Dài Dài Tay'],'05':['Áo Thun Sát Nách'],'20':['Bộ Vest'],'21':['Áo Nỉ'],'22':['Áo Khoác Gió'],'23':['Áo Khoác Gió'],'24':['Áo Khoác Nỉ'],'25':['Áo Khoác Nỉ'],'26':['Áo Khoác Dạ'],'27':['Áo Khoác Gió'],'28':['Áo Khoác Nỉ'],'30':['Quần Short Kaki'],'31':['Quần Short Jeans'],'32':['Quần Short Thô'],'33':['Quần Short Thun'],'34':['Quần Short Thun'],'35':['Quần Short Thun'],'36':['Quần Yếm Short'],'39':['Quần Thun Dài'],'40':['Quần Thun Dài'],'41':['Quần Jeans Dài'],'42':['Quần Kaki Dài'],'43':['Quần Legging Dài'],'44':['Quần Nỉ Dài'],'45':['Quần Yếm Short'],'46':['Quần Short Thô'],'47':['Quần Nhung Dài'],'48':['Quần Legging Lửng'],'50':['Váy Ngắn Tay'],'51':['Váy Dài Tay'],'52':['Váy Sát Nách'],'53':['Váy Công Chúa'],'54':['Đầm Váy 2 Dây'],'55':['Chân Váy'],'56':['Yếm Váy'],'57':['Set Đầm Áo'],'58':['Set Đầm Áo'],'59':['Bộ Kiểu'],'60':['Bộ Thun Ngắn Tay'],'61':['Bộ Thun Dài Tay'],'62':['Bộ Thun Ngắn Tay'],'63':['Bộ Thun Dài Tay'],'64':['Bộ Vest'],'65':['Bộ Kiểu'],'66':['Bộ Nỉ'],'67':['Bộ Thun Sát Nách'],'68':['Bộ Sơ Sinh']};
+
+const LS_KEY = 'rabity_sc_table_v1';
+let tableData = [];
+let filterPK = '';
+let lastResult = null;
+
+function fmt(n){ return n ? n.toLocaleString('vi-VN')+'đ' : '—'; }
+function pkClass(pk){ return pk==='Cơ bản'?'pk-co-ban':pk==='Trung cấp'?'pk-trung-cap':'pk-cao-cap'; }
+
+function loadTable(){ try{ const s=localStorage.getItem(LS_KEY); tableData=s?JSON.parse(s):[]; }catch(e){ tableData=[]; } }
+function saveTable(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(tableData)); }catch(e){} }
+
+function getPriceRange(dg){
+  const nums=(dg.match(/\d+/g)||[]).map(n=>parseInt(n)*1000);
+  if(!nums.length) return [0,9999999];
+  if(nums.length===1) return [nums[0]*0.8,nums[0]*1.2];
+  return [Math.min(...nums),Math.max(...nums)];
+}
+
+// SKU decode
+function onSkuInput(v){
+  v=v.replace(/\D/g,'').slice(0,8);
+  document.getElementById('sku-input').value=v;
+  const b1=document.getElementById('dc-brand'),b2=document.getElementById('dc-type'),b3=document.getElementById('dc-seq'),b4=document.getElementById('dc-year');
+  [b1,b2,b3,b4].forEach(b=>{b.className='decode-chip';});
+  if(v.length>=1){const br=BRAND[v[0]];b1.textContent='TH: '+(br||'?');if(br)b1.className='decode-chip hit';}
+  else b1.textContent='Thương hiệu: —';
+  if(v.length>=3){const c=CATE[v.slice(1,3)];b2.textContent='Loại: '+(c||'?');if(c)b2.className='decode-chip hit';}
+  else b2.textContent='Loại: —';
+  if(v.length>=6){b3.textContent='STT: '+v.slice(3,6);b3.className='decode-chip hit';}
+  else b3.textContent='STT: —';
+  if(v.length>=8){b4.textContent='Năm: 20'+v.slice(6,8);b4.className='decode-chip hit';}
+  else b4.textContent='Năm: —';
+}
+
+function suggestSC(){
+  const sku=document.getElementById('sku-input').value.trim();
+  const priceRaw=parseInt(document.getElementById('price-input').value);
+  if(sku.length<3){alert('Vui lòng nhập ít nhất 3 ký tự mã SKU.');return;}
+  if(!priceRaw||priceRaw<1000){alert('Vui lòng nhập giá bán hợp lệ.');return;}
+  const price=priceRaw>=1000?priceRaw:priceRaw*1000;
+  const cate=sku.slice(1,3);
+  const types=CATE_TO_SC[cate]||[];
+  let scored=SC_DATA.map(sc=>{
+    let score=0;
+    const match=types.some(t=>sc.loai_hh.toLowerCase().includes(t.toLowerCase())||t.toLowerCase().includes(sc.loai_hh.toLowerCase()));
+    if(match) score+=60;
+    const [lo,hi]=getPriceRange(sc.dai_gia);
+    if(price>=lo&&price<=hi) score+=30;
+    else{const mid=(lo+hi)/2;const d=Math.abs(price-mid)/Math.max(mid,1);score+=Math.max(0,10-d*10);}
+    return{sc,score};
+  }).filter(s=>s.score>0).sort((a,b)=>b.score-a.score);
+  if(!scored.length){alert('Không tìm được nhóm SC phù hợp. Vui lòng tra cứu thủ công ở tab Tra Cứu.');return;}
+  const best=scored[0],sc=best.sc;
+  const conf=Math.round(Math.min(best.score,90));
+  const[lo,hi]=getPriceRange(sc.dai_gia);
+  const inRange=price>=lo&&price<=hi;
+  lastResult={sku,price,name:document.getElementById('name-input').value.trim(),sc,conf};
+  document.getElementById('res-sc-id').textContent='SC-'+sc.ma_sc;
+  document.getElementById('res-name').textContent=sc.loai_hh;
+  document.getElementById('res-sub').textContent=sc.phan_khuc+' · Dải giá: '+sc.dai_gia;
+  document.getElementById('res-median').textContent=fmt(sc.sc_median);
+  document.getElementById('res-p25').textContent=fmt(sc.p25);
+  document.getElementById('res-p75').textContent=fmt(sc.p75);
+  document.getElementById('res-nvl').textContent=Math.round(sc.pct_nvl*100)+'%';
+  document.getElementById('res-nc').textContent=Math.round(sc.pct_nc*100)+'%';
+  document.getElementById('res-pk-wrap').innerHTML=`<span class="pk-tag ${pkClass(sc.phan_khuc)}">${sc.phan_khuc}</span>`;
+  document.getElementById('res-vatlieu').innerHTML=`<strong>Vật liệu:</strong> ${sc.vat_lieu}`;
+  document.getElementById('res-warn').style.display=inRange?'none':'block';
+  document.getElementById('res-conf').textContent=conf+'%';
+  document.getElementById('save-msg').style.display='none';
+  document.getElementById('result-new').style.display='block';
+}
+
+function saveToTable(){
+  if(!lastResult){return;}
+  const{sku,price,name,sc}=lastResult;
+  const id='row_'+Date.now();
+  tableData.push({id,sku,name,ma_sc:sc.ma_sc,loai_hh:sc.loai_hh,phan_khuc:sc.phan_khuc,dai_gia:sc.dai_gia,price,sc_median:sc.sc_median,p25:sc.p25,p75:sc.p75,is_new:true,ts:Date.now()});
+  saveTable();
+  renderTableTab();
+  document.getElementById('save-msg').style.display='block';
+  setTimeout(()=>document.getElementById('save-msg').style.display='none',3000);
+}
+
+function clearNew(){
+  document.getElementById('sku-input').value='';
+  document.getElementById('price-input').value='';
+  document.getElementById('name-input').value='';
+  document.getElementById('result-new').style.display='none';
+  document.getElementById('save-msg').style.display='none';
+  onSkuInput('');
+  lastResult=null;
+}
+
+// LOOKUP
+function setFilter(btn,pk){
+  filterPK=pk;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLookup();
+}
+function renderLookup(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  let list=SC_DATA;
+  if(filterPK) list=list.filter(s=>s.phan_khuc===filterPK);
+  if(q) list=list.filter(s=>s.ten_nhom.toLowerCase().includes(q)||s.ma_sc.includes(q)||s.loai_hh.toLowerCase().includes(q));
+  document.getElementById('lookup-count').textContent=list.length+' nhóm';
+  const c=document.getElementById('sc-list');
+  if(!list.length){c.innerHTML=`<div class="no-res">🔍 Không tìm thấy nhóm SC phù hợp</div>`;return;}
+  c.innerHTML=list.map(sc=>`
+    <div class="sc-item" onclick="openModal('${sc.ma_sc}')">
+      <div class="i-top"><span class="i-name">${sc.loai_hh}</span><span class="i-median">${fmt(sc.sc_median)}</span></div>
+      <div class="i-sub">SC-${sc.ma_sc} · ${sc.phan_khuc} · ${sc.dai_gia}</div>
+    </div>`).join('');
+}
+
+// TABLE TAB
+function renderTableTab(){
+  const badge=document.getElementById('tbl-badge');
+  const tbody=document.getElementById('tbl-body');
+  badge.textContent=tableData.length+' mục';
+  if(!tableData.length){
+    tbody.innerHTML=`<tr><td colspan="10"><div class="empty-tbl"><div class="icon">📋</div>Chưa có dữ liệu. Hãy tra cứu sản phẩm mới và lưu vào đây.</div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML=tableData.map(r=>`
+    <tr class="${r.is_new?'new-row':''}">
+      <td class="td-sc">${r.sku||'—'}</td>
+      <td>${r.name||'—'}${r.is_new?'<span class="new-badge">MỚI</span>':''}</td>
+      <td class="td-sc">SC-${r.ma_sc}</td>
+      <td class="td-price">${fmt(r.price)}</td>
+      <td class="td-median">${fmt(r.sc_median)}</td>
+      <td class="td-price">${fmt(r.p25)}</td>
+      <td class="td-price">${fmt(r.p75)}</td>
+      <td><span class="pk-tag ${pkClass(r.phan_khuc)}">${r.phan_khuc}</span></td>
+      <td style="font-size:11px;color:var(--muted);font-weight:600">${r.loai_hh}</td>
+      <td><button class="td-del" onclick="deleteRow('${r.id}')">✕</button></td>
+    </tr>`).join('');
+}
+
+function deleteRow(id){
+  tableData=tableData.filter(r=>r.id!==id);
+  saveTable();
+  renderTableTab();
+}
+
+function clearTable(){
+  if(!confirm('Xoá toàn bộ dữ liệu trong bảng tổng hợp?')) return;
+  tableData=[];
+  saveTable();
+  renderTableTab();
+}
+
+function exportCSV(){
+  if(!tableData.length){alert('Bảng tổng hợp đang trống.');return;}
+  const hd=['SKU','Tên SP','Nhóm SC','Loại hàng','Phân khúc','Dải giá','Giá bán','SC Median','P25','P75'];
+  const rows=tableData.map(r=>[r.sku,r.name,'SC-'+r.ma_sc,r.loai_hh,r.phan_khuc,r.dai_gia,r.price,r.sc_median,r.p25,r.p75].map(v=>`"${v||''}"`).join(','));
+  const csv='\uFEFF'+[hd.join(','),...rows].join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='SC_TanPhu_TongHop.csv';
+  a.click();
+}
+
+// MODAL
+function openModal(masc){
+  const sc=SC_DATA.find(s=>s.ma_sc===masc);if(!sc)return;
+  document.getElementById('modal-title').textContent=sc.ten_nhom;
+  document.getElementById('modal-body').innerHTML=`
+    <div class="d-row"><span class="d-key">Mã SC</span><span class="d-val" style="color:var(--accent)">SC-${sc.ma_sc}</span></div>
+    <div class="d-row"><span class="d-key">Loại hàng hóa</span><span class="d-val">${sc.loai_hh}</span></div>
+    <div class="d-row"><span class="d-key">Phân khúc</span><span class="d-val"><span class="pk-tag ${pkClass(sc.phan_khuc)}">${sc.phan_khuc}</span></span></div>
+    <div class="d-row"><span class="d-key">Dải giá bán</span><span class="d-val">${sc.dai_gia}</span></div>
+    <div class="d-row"><span class="d-key">★ SC Median</span><span class="d-val" style="color:var(--accent2);font-size:16px">${fmt(sc.sc_median)}</span></div>
+    <div class="d-row"><span class="d-key">P25 (Lower)</span><span class="d-val">${fmt(sc.p25)}</span></div>
+    <div class="d-row"><span class="d-key">P75 (Upper)</span><span class="d-val">${fmt(sc.p75)}</span></div>
+    <div class="d-row"><span class="d-key">% NVL</span><span class="d-val">${Math.round(sc.pct_nvl*100)}%</span></div>
+    <div class="d-row"><span class="d-key">% NC</span><span class="d-val">${Math.round(sc.pct_nc*100)}%</span></div>
+    <div class="d-row"><span class="d-key">Vật liệu chủ đạo</span><span class="d-val" style="font-family:inherit;font-size:11px;max-width:55%;text-align:right">${sc.vat_lieu}</span></div>`;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModalBg(e){if(e.target===document.getElementById('modal'))closeModal();}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+
+// TABS
+function switchTab(t){
+  ['new','lookup','table'].forEach(n=>{
+    document.getElementById('tab-'+n).classList.toggle('active',n===t);
+  });
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['new','lookup','table'][i]===t);
+  });
+  if(t==='table') renderTableTab();
+}
+
+// INIT
+loadTable();
+renderLookup();
+</script>
+</body>
+</html>
